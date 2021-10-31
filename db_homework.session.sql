@@ -46,7 +46,7 @@ CREATE TABLE "orders_and_goods"(
 INSERT INTO "orders_and_goods"
 VALUES (1, 1)
 
-/*TABLE Shipment of goods*/
+/*TABLE shipment_of_goods*/
 DROP TABLE "shipment_of_goods";
 
 CREATE TABLE "shipment_of_goods"(
@@ -59,3 +59,16 @@ CREATE TABLE "shipment_of_goods"(
 
 INSERT INTO "shipment_of_goods" ("id_orders", "goods_shipped")
 VALUES (1, 4)
+
+/*TABLE shipment_and_goods*/
+DROP TABLE "shipment_and_goods";
+
+CREATE TABLE "shipment_and_goods"(
+    "id_shipment" int,
+    FOREIGN KEY ("id_shipment") REFERENCES "shipment_of_goods",
+    "id_goods" int,
+    FOREIGN KEY ("id_goods") REFERENCES "goods"
+);
+
+INSERT INTO "shipment_and_goods"
+VALUES (1, 1)
