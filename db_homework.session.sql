@@ -32,3 +32,16 @@ INSERT INTO "orders" (
         "planned_delivery"
     )
 VALUES ('Phones', 'St.Walls', '4855226564', 'Phones', 4)
+
+/*TABLE Orders_and_goods*/
+DROP TABLE "orders_and_goods";
+
+CREATE TABLE "orders_and_goods"(
+    "id_orders" int,
+    FOREIGN KEY ("id_orders") REFERENCES "orders",
+    "id_goods" int,
+    FOREIGN KEY ("id_goods") REFERENCES "goods"
+);
+
+INSERT INTO "orders_and_goods"
+VALUES (1, 1)
