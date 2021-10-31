@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "db_homework",
+            "database": "db_homework",
+            "username": "postgres",
+            "password": "postgres"
+        }
+    ]
+}
