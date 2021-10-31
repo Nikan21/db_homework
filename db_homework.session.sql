@@ -8,7 +8,7 @@ CREATE TABLE "goods"(
 );
 
 INSERT INTO "goods" ("name_goods", "price")
-VALUES ('Phone', 25)
+VALUES ('Car', 1050)
 
 /*TABLE ORDERS*/
 DROP TABLE "orders";
@@ -17,10 +17,11 @@ CREATE TABLE "orders"(
     "id_orders" SERIAL PRIMARY KEY,
     "name_orders" VARCHAR(42) NOT NULL CHECK("name_orders" != ''),
     "adress" VARCHAR(36) NOT NULL CHECK("adress" != ''),
-    "phone_number" VARCHAR(10) NOT NULL CHECK("phone_number" != ''),
+    "phone_number" VARCHAR(10) UNIQUE NOT NULL CHECK("phone_number" != ''),
     "contract_number" SERIAL,
     "date_conclusion_of_a_contract" DATE DEFAULT current_date,
-    "name_goods" VARCHAR(42) NOT NULL CHECK("name_goods" != ''),
+    "name_goods" int,
+    FOREIGN KEY ("name_goods") REFERENCES "goods",
     "planned_delivery" SMALLINT NOT NULL CHECK("planned_delivery" > 0)
 );
 
@@ -31,7 +32,7 @@ INSERT INTO "orders" (
         "name_goods",
         "planned_delivery"
     )
-VALUES ('Phones', 'St.Walls', '4855226564', 'Phones', 4)
+VALUES ('Car', 'St.LasVegas', '1851126454', 4, 5)
 
 /*TABLE Orders_and_goods*/
 DROP TABLE "orders_and_goods";
@@ -44,7 +45,7 @@ CREATE TABLE "orders_and_goods"(
 );
 
 INSERT INTO "orders_and_goods"
-VALUES (1, 1)
+VALUES (4, 4)
 
 /*TABLE shipment_of_goods*/
 DROP TABLE "shipment_of_goods";
@@ -54,11 +55,12 @@ CREATE TABLE "shipment_of_goods"(
     "id_orders" int,
     FOREIGN KEY ("id_orders") REFERENCES "orders",
     "date_shipment" DATE DEFAULT current_date,
+    "receiving_address" VARCHAR(36) NOT NULL CHECK("receiving_address" != ''),
     "goods_shipped" SMALLINT NOT NULL CHECK("goods_shipped" > 0)
 );
 
-INSERT INTO "shipment_of_goods" ("id_orders", "goods_shipped")
-VALUES (1, 4)
+INSERT INTO "shipment_of_goods" ("id_orders", "receiving_address", "goods_shipped")
+VALUES (4, 'St.Yellow', 25)
 
 /*TABLE shipment_and_goods*/
 DROP TABLE "shipment_and_goods";
@@ -71,4 +73,7 @@ CREATE TABLE "shipment_and_goods"(
 );
 
 INSERT INTO "shipment_and_goods"
-VALUES (1, 1)
+VALUES (4, 4)
+
+SELECT "shipment_of_goods".goods_shipped - "orders".planned_delivery FROM "shipment_of_goods", "orders"
+WHERE "shipment_of_goods".id_shipment = "orders".id_orders;
