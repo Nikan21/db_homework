@@ -45,3 +45,17 @@ CREATE TABLE "orders_and_goods"(
 
 INSERT INTO "orders_and_goods"
 VALUES (1, 1)
+
+/*TABLE Shipment of goods*/
+DROP TABLE "shipment_of_goods";
+
+CREATE TABLE "shipment_of_goods"(
+    "id_shipment" SERIAL PRIMARY KEY,
+    "id_orders" int,
+    FOREIGN KEY ("id_orders") REFERENCES "orders",
+    "date_shipment" DATE DEFAULT current_date,
+    "goods_shipped" SMALLINT NOT NULL CHECK("goods_shipped" > 0)
+);
+
+INSERT INTO "shipment_of_goods" ("id_orders", "goods_shipped")
+VALUES (1, 4)
