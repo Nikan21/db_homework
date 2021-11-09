@@ -3,7 +3,7 @@ DROP TABLE "goods";
 
 CREATE TABLE "goods"(
     "id" SERIAL PRIMARY KEY,
-    "name_goods" VARCHAR(42) NOT NULL CHECK("name_goods" != ''),
+    "name_good" VARCHAR(42) NOT NULL CHECK("name_goods" != ''),
     "price" SMALLINT NOT NULL CHECK("price" > 1)
 );
 
@@ -20,7 +20,7 @@ CREATE TABLE "orders"(
     "phone_number" VARCHAR(10) UNIQUE NOT NULL CHECK("phone_number" != ''),
     "contract_number" SERIAL,
     "date_conclusion_of_a_contract" DATE DEFAULT current_date,
-    "name_goods" int,
+    "name_good" int,
     FOREIGN KEY ("name_goods") REFERENCES "goods",
     "planned_delivery" SMALLINT NOT NULL CHECK("planned_delivery" > 0)
 );
