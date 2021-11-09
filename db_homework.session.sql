@@ -10,15 +10,27 @@ CREATE TABLE "goods"(
 INSERT INTO "goods" ("name_goods", "price")
 VALUES ('Car', 1050)
 
+/*TABLE USERS*/
+DROP TABLE "users";
+
+CREATE TABLE "users"(
+    "id" SERIAL PRIMARY KEY,
+    "first_name" VARCHAR(42) NOT NULL CHECK("first_orders" != ''),
+    "last_name" VARCHAR(68) NOT NULL CHECK("last_orders" != ''),    
+    "adress" VARCHAR(36) NOT NULL CHECK("adress" != ''),
+    "phone_number" VARCHAR(10) UNIQUE NOT NULL CHECK("phone_number" != ''),
+    "contract_number" int,
+    FOREIGN KEY ("contract_number") REFERENCES "orders"
+);
+
+INSERT INTO "users" ("first_name", "last_name", "adress", "phone_number", "contract_number") VALUES ('Nikolay', 'Grachev', 'Str.Puskina', '21312131', 1)
+
 /*TABLE ORDERS*/
 DROP TABLE "orders";
 
 CREATE TABLE "orders"(
     "id" SERIAL PRIMARY KEY,
     "name_orders" VARCHAR(42) NOT NULL CHECK("name_orders" != ''),
-    "adress" VARCHAR(36) NOT NULL CHECK("adress" != ''),
-    "phone_number" VARCHAR(10) UNIQUE NOT NULL CHECK("phone_number" != ''),
-    "contract_number" SERIAL,
     "date_conclusion_of_a_contract" DATE DEFAULT current_date,
     "planned_delivery" SMALLINT NOT NULL CHECK("planned_delivery" > 0)
 );
