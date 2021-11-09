@@ -19,8 +19,6 @@ CREATE TABLE "users"(
     "last_name" VARCHAR(68) NOT NULL CHECK("last_orders" != ''),    
     "adress" VARCHAR(36) NOT NULL CHECK("adress" != ''),
     "phone_number" VARCHAR(10) UNIQUE NOT NULL CHECK("phone_number" != ''),
-    "contract_number" int,
-    FOREIGN KEY ("contract_number") REFERENCES "orders"
 );
 
 INSERT INTO "users" ("first_name", "last_name", "adress", "phone_number", "contract_number") VALUES ('Nikolay', 'Grachev', 'Str.Puskina', '21312131', 1)
@@ -33,6 +31,10 @@ CREATE TABLE "orders"(
     "name_orders" VARCHAR(42) NOT NULL CHECK("name_orders" != ''),
     "date_conclusion_of_a_contract" DATE DEFAULT current_date,
     "planned_delivery" SMALLINT NOT NULL CHECK("planned_delivery" > 0)
+    "contract_number_user" int,
+    FOREIGN KEY ("contract_number_user") REFERENCES "users"
+    "user_order" int, 
+    FOREIGN KEY ("user_order") REFERENCES "users"
 );
 
 INSERT INTO "orders" (
@@ -40,9 +42,11 @@ INSERT INTO "orders" (
         "adress",
         "phone_number",
         "name_goods",
-        "planned_delivery"
+        "planned_delivery",
+        "contract_number_user",
+        "user_order"
     )
-VALUES ('Car', 'St.LasVegas', '1851126454', 4, 5)
+VALUES ('Car', 'St.LasVegas', '1851126454', 4, 5, 1, 5)
 
 /*TABLE Orders_and_goods*/
 DROP TABLE "orders_and_goods";
