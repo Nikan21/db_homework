@@ -2,7 +2,7 @@
 DROP TABLE "goods";
 
 CREATE TABLE "goods"(
-    "id_goods" SERIAL PRIMARY KEY,
+    "id" SERIAL PRIMARY KEY,
     "name_goods" VARCHAR(42) NOT NULL CHECK("name_goods" != ''),
     "price" SMALLINT NOT NULL CHECK("price" > 1)
 );
@@ -14,7 +14,7 @@ VALUES ('Car', 1050)
 DROP TABLE "orders";
 
 CREATE TABLE "orders"(
-    "id_orders" SERIAL PRIMARY KEY,
+    "id" SERIAL PRIMARY KEY,
     "name_orders" VARCHAR(42) NOT NULL CHECK("name_orders" != ''),
     "adress" VARCHAR(36) NOT NULL CHECK("adress" != ''),
     "phone_number" VARCHAR(10) UNIQUE NOT NULL CHECK("phone_number" != ''),
@@ -51,7 +51,7 @@ VALUES (4, 4)
 DROP TABLE "shipment_of_goods";
 
 CREATE TABLE "shipment_of_goods"(
-    "id_shipment" SERIAL PRIMARY KEY,
+    "id" SERIAL PRIMARY KEY,
     "id_orders" int,
     FOREIGN KEY ("id_orders") REFERENCES "orders",
     "date_shipment" DATE DEFAULT current_date,
