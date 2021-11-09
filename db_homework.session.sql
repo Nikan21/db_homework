@@ -20,8 +20,6 @@ CREATE TABLE "orders"(
     "phone_number" VARCHAR(10) UNIQUE NOT NULL CHECK("phone_number" != ''),
     "contract_number" SERIAL,
     "date_conclusion_of_a_contract" DATE DEFAULT current_date,
-    "name_good" int,
-    FOREIGN KEY ("name_goods") REFERENCES "goods",
     "planned_delivery" SMALLINT NOT NULL CHECK("planned_delivery" > 0)
 );
 
